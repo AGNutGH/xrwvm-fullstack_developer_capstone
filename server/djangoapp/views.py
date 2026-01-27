@@ -11,8 +11,8 @@ from django.contrib.auth import login, authenticate
 import logging
 import json
 from django.views.decorators.csrf import csrf_exempt
+from .models import CarMake, CarModel
 from .populate import initiate
-
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
@@ -75,6 +75,30 @@ def registration(request):
     else :
         data = {"userName":username,"error":"Already Registered"}
         return JsonResponse(data)
+
+def get_cars(request):
+    """
+    Method to get the list of cars.
+    Populates the database using initiate() if CarMake is empty.
+    """
+    # Check the count of CarMake objects
+    count = CarMake.objects.filter().count()
+    print(count)
+    
+    # If no CarMakes exist, initiate the population script
+    if(count == 0):
+        initiate()
+    
+    # Fetch all CarModel objects including related CarMake data
+    car_models = CarModel.objects.select_related('car_make')
+    cars = []
+    
+    # Format the data into a list of dictionaries
+    for car_model in car_models:
+        cars.append({"CarModel": car_model.name, "CarMake": car_model.car_make.name})
+    
+    # Return the list as a JSON response
+    return JsonResponse({"CarModels": cars})
 
 # # Update the `get_dealerships` view to render the index page with
 # a list of dealerships

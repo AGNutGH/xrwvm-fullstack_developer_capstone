@@ -22,32 +22,27 @@ def initiate():
 
     # 2. CarModel data to match all choices
     car_model_data = [
-        # Nissan - Mix of SUV, Coupe, Hatchback
         {"name": "Pathfinder", "type": "SUV", "year": 2023, "fuel": "Gasoline", "car_make": car_make_instances[0]},
-        {"name": "Z-Proto", "type": "COUPE", "year": 2023, "fuel": "Gasoline", "car_make": car_make_instances[0]},
-        {"name": "Leaf", "type": "HATCHBACK", "year": 2023, "fuel": "Electric", "car_make": car_make_instances[0]},
+        {"name": "Z-Proto", "type": "Coupe", "year": 2023, "fuel": "Gasoline", "car_make": car_make_instances[0]},
+        {"name": "Leaf", "type": "Hatchback", "year": 2023, "fuel": "Electric", "car_make": car_make_instances[0]},
         
-        # Mercedes - Mix of SUV, Convertible, Sedan
         {"name": "A-Class", "type": "SUV", "year": 2023, "fuel": "Diesel", "car_make": car_make_instances[1]},
-        {"name": "SL-Roadster", "type": "CONVERTIBLE", "year": 2023, "fuel": "Gasoline", "car_make": car_make_instances[1]},
-        {"name": "EQS", "type": "SEDAN", "year": 2023, "fuel": "Electric", "car_make": car_make_instances[1]},
+        {"name": "SL-Roadster", "type": "Convertible", "year": 2023, "fuel": "Gasoline", "car_make": car_make_instances[1]},
+        {"name": "EQS", "type": "Sedan", "year": 2023, "fuel": "Electric", "car_make": car_make_instances[1]},
         
-        # Audi - Mix of Sedan, Coupe, Wagon
-        {"name": "A4", "type": "SEDAN", "year": 2023, "fuel": "Gasoline", "car_make": car_make_instances[2]},
-        {"name": "TT", "type": "COUPE", "year": 2023, "fuel": "Gasoline", "car_make": car_make_instances[2]},
-        {"name": "RS6", "type": "WAGON", "year": 2023, "fuel": "Gasoline", "car_make": car_make_instances[2]},
+        {"name": "A4", "type": "Sedan", "year": 2023, "fuel": "Gasoline", "car_make": car_make_instances[2]},
+        {"name": "TT", "type": "Coupe", "year": 2023, "fuel": "Gasoline", "car_make": car_make_instances[2]},
+        {"name": "RS6", "type": "Wagon", "year": 2023, "fuel": "Gasoline", "car_make": car_make_instances[2]},
         
-        # Kia - Mix of SUV, Wagon, Sedan
         {"name": "Sorrento", "type": "SUV", "year": 2023, "fuel": "Gasoline", "car_make": car_make_instances[3]},
-        {"name": "Carnival", "type": "WAGON", "year": 2023, "fuel": "Gasoline", "car_make": car_make_instances[3]},
-        {"name": "Cerato", "type": "SEDAN", "year": 2023, "fuel": "Gasoline", "car_make": car_make_instances[3]},
+        {"name": "Carnival", "type": "Wagon", "year": 2023, "fuel": "Gasoline", "car_make": car_make_instances[3]},
+        {"name": "Cerato", "type": "Sedan", "year": 2023, "fuel": "Gasoline", "car_make": car_make_instances[3]},
         
-        # Toyota - Mix of Hatchback, Sedan, Truck
-        {"name": "Corolla", "type": "HATCHBACK", "year": 2023, "fuel": "Gasoline", "car_make": car_make_instances[4]},
-        {"name": "Camry", "type": "SEDAN", "year": 2023, "fuel": "Gasoline", "car_make": car_make_instances[4]},
-        {"name": "Hilux", "type": "TRUCK", "year": 2023, "fuel": "Diesel", "car_make": car_make_instances[4]},
+        {"name": "Corolla", "type": "Hatchback", "year": 2023, "fuel": "Gasoline", "car_make": car_make_instances[4]},
+        {"name": "Camry", "type": "Sedan", "year": 2023, "fuel": "Gasoline", "car_make": car_make_instances[4]},
+        {"name": "Hilux", "type": "Truck", "year": 2023, "fuel": "Diesel", "car_make": car_make_instances[4]},
     ]
-
+    
     for data in car_model_data:
         CarModel.objects.create(
             name=data['name'], 

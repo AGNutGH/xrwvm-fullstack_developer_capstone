@@ -25,7 +25,7 @@ class CarModel(models.Model):
         ('COUPE', 'Coupe'),
         ('TRUCK', 'Truck')
     ]
-    type = models.CharField(max_length=15, choices=CAR_TYPES, default='SUV')
+    type = models.CharField(max_length=15, choices=CAR_TYPES)
     
     year = models.IntegerField(default=2023,
         validators=[

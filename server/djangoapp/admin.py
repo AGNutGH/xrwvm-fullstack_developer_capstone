@@ -11,14 +11,17 @@ class CarModelInline(admin.StackedInline):
 
 # CarModelAdmin class
 class CarModelAdmin(admin.ModelAdmin):
-    list_display = ['name', 'car_make', 'type', 'year', 'dealer_id']
-    list_filter = ['type', 'year', 'car_make']
+    # Added 'fuel_type' to list_display so it appears as a column
+    list_display = ['name', 'car_make', 'type', 'year', 'fuel_type', 'dealer_id']
+    # Added 'fuel_type' to filters for better search capability
+    list_filter = ['type', 'year', 'car_make', 'fuel_type']
     search_fields = ['name', 'car_make__name']
 
 # CarMakeAdmin class with CarModelInline
 class CarMakeAdmin(admin.ModelAdmin):
-    list_display = ['name', 'description']
-    search_fields = ['name']
+    # Added 'country_of_origin' to reflect your custom model field
+    list_display = ['name', 'description', 'country_of_origin']
+    search_fields = ['name', 'country_of_origin']
     inlines = [CarModelInline]
 
 # Register models here

@@ -95,7 +95,14 @@ def get_cars(request):
     
     # Format the data into a list of dictionaries
     for car_model in car_models:
-        cars.append({"CarModel": car_model.name, "CarMake": car_model.car_make.name})
+        cars.append({
+            "CarModel": car_model.name, 
+            "CarMake": car_model.car_make.name,
+            "Type": car_model.type,
+            "Year": car_model.year,
+            "Fuel": car_model.fuel_type,
+            "ID": car_model.dealer_id
+        })
     
     # Return the list as a JSON response
     return JsonResponse({"CarModels": cars})

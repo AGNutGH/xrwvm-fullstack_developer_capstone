@@ -24,17 +24,16 @@ const Dealer = () => {
   let reviews_url = root_url+`djangoapp/reviews/dealer/${id}`;
   let post_review = root_url+`postreview/${id}`;
   
-  const get_dealer = async ()=>{
-    const res = await fetch(dealer_url, {
-      method: "GET"
-    });
-    const retobj = await res.json();
-    
-    if(retobj.status === 200) {
-      let dealerobjs = Array.from(retobj.dealer)
-      setDealer(dealerobjs[0])
-    }
+const get_dealer = async ()=>{
+  const res = await fetch(dealer_url, {
+    method: "GET"
+  });
+  const retobj = await res.json();
+  
+  if(retobj.status === 200) {
+    setDealer(retobj.dealer); 
   }
+}
 
   const get_reviews = async ()=>{
     const res = await fetch(reviews_url, {
@@ -67,27 +66,51 @@ const Dealer = () => {
   },[]);  
 
 
-return(
-  <div style={{margin:"20px"}}>
-      <Header/>
-      <div style={{marginTop:"10px"}}>
-      <h1 style={{color:"grey"}}>{dealer.full_name}{postReview}</h1>
-      <h4  style={{color:"grey"}}>{dealer['city']},{dealer['address']}, Zip - {dealer['zip']}, {dealer['state']} </h4>
-      </div>
-      <div class="reviews_panel">
-      {reviews.length === 0 && unreviewed === false ? (
-        <text>Loading Reviews....</text>
-      ):  unreviewed === true? <div>No reviews yet! </div> :
-      reviews.map(review => (
-        <div className='review_panel'>
-          <img src={senti_icon(review.sentiment)} className="emotion_icon" alt='Sentiment'/>
-          <div className='review'>{review.review}</div>
-          <div className="reviewer">{review.name} {review.car_make} {review.car_model} {review.car_year}</div>
+  return (
+    <div style={{ margin: "20px" }}>
+      <Header />
+      
+      {/* 1. Ensure dealer data exists before rendering */}
+      {dealer && Object.keys(dealer).length > 0 ? (
+        <div style={{ marginTop: "10px" }}>
+          <h1 style={{ color: "grey" }}>
+            {dealer.full_name}
+            {postReview}
+          </h1>
+          <h4 style={{ color: "grey" }}>
+            {dealer.city}, {dealer.address}, Zip - {dealer.zip}, {dealer.state}
+          </h4>
         </div>
-      ))}
-    </div>  
-  </div>
-)
-}
-
-export default Dealer
+      ) : (
+        <div style={{ marginTop: "10px" }}>
+          <h1 style={{ color: "grey" }}>Loading Dealer Details...</h1>
+        </div>
+      )}
+  
+      {/* 2. Show review panel */}
+      <div className="reviews_panel">
+        {reviews.length === 0 && unreviewed === false ? (
+          <text>Loading Reviews....</text>
+        ) : unreviewed === true ? (
+          <div>No reviews yet! </div>
+        ) : (
+          reviews.map((review, index) => (
+            <div className="review_panel" key={index}>
+              <img 
+                src={senti_icon(review.sentiment)} 
+                className="emotion_icon" 
+                alt="Sentiment" 
+              />
+              <div className="review">{review.review}</div>
+              <div className="reviewer">
+                {review.name} {review.car_make} {review.car_model} {review.car_year}
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+    </div>
+  );
+  }
+  
+  export default Dealer;

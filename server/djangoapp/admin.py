@@ -1,19 +1,21 @@
 from django.contrib import admin
 from .models import CarMake, CarModel
 
+
 class CarModelInline(admin.StackedInline):
     model = CarModel
     extra = 5
+
 
 # CarModelAdmin class
 class CarModelAdmin(admin.ModelAdmin):
     # Added 'fuel_type' to list_display so it appears as a column
     list_display = [
-        'name', 
-        'car_make', 
-        'type', 
-        'year', 
-        'fuel_type', 
+        'name',
+        'car_make',
+        'type',
+        'year',
+        'fuel_type',
         'dealer_id']
     # Added 'fuel_type' to filters for better search capability
     list_filter = ['type', 'year', 'car_make', 'fuel_type']
